@@ -34,6 +34,7 @@ const MainWrapper = (props) => {
 
   useEffect(() => {
     if (!selectedOption) return;
+    // should reformat surveyData with just {name, male, female} for rechart
     let newSelectedData = {
       name: "",
       zipcodes: [],
@@ -67,7 +68,7 @@ const MainWrapper = (props) => {
     <ComponentContainer>
       <h3>Neighborhood: {`${selectedOption}`}</h3>
       <SelectorContainer>
-        <label htmlFor="neighborhood selection">Select A Neighborhood:</label>
+        <label htmlFor="neighborhood selection">Select A Neighborhood: </label>
         <select
           id="neighborhood selection"
           value={selectedOption}

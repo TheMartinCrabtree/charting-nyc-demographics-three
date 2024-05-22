@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
+import AreaChartView from "./AreaChartView";
+import BarChartView from "./BarChartView";
 import styled from "styled-components";
 
 const LayoutWrapper = styled.div``;
 const SelectionContainer = styled.div``;
+const ChartContainer = styled.div`
+  background-color: lightgray;
+`;
 
 const GraphContainer = (props) => {
-  const { data } = props;
+  const { surveyData } = props.data;
   const chartOptions = ["Area Chart", "Bar Chart"];
   const [chartStyle, setChartStyle] = useState("Area Chart");
   const handleChange = (event) =>
@@ -26,7 +31,7 @@ const GraphContainer = (props) => {
   return (
     <LayoutWrapper>
       <SelectionContainer>
-        <label htmlFor="chart style selection">Select A Chart Style:</label>
+        <label htmlFor="chart style selection">Select A Chart Style: </label>
         <select
           id="chart style selection"
           value={chartStyle}
@@ -35,6 +40,13 @@ const GraphContainer = (props) => {
           {chartOptions && renderOptions()}
         </select>
       </SelectionContainer>
+      <ChartContainer>
+        {chartStyle === "Area Chart" ? (
+          <AreaChartView data={surveyData} />
+        ) : (
+          <BarChartView data={surveyData} />
+        )}
+      </ChartContainer>
     </LayoutWrapper>
   );
 };
