@@ -67,15 +67,19 @@ const MainWrapper = (props) => {
     <ComponentContainer>
       <h3>Neighborhood: {`${selectedOption}`}</h3>
       <SelectorContainer>
-        <label htmlFor="dropdown">Choose an option:</label>
-        <select id="dropdown" value={selectedOption} onChange={handleChange}>
+        <label htmlFor="neighborhood selection">Select A Neighborhood:</label>
+        <select
+          id="neighborhood selection"
+          value={selectedOption}
+          onChange={handleChange}
+        >
           <option value="" disabled>
             Select an option
           </option>
           {allData && allData.neighborhoods && renderOptions()}
         </select>
       </SelectorContainer>
-      <GraphContainer />
+      {selectedData && <GraphContainer data={selectedData} />}
     </ComponentContainer>
   );
 };
