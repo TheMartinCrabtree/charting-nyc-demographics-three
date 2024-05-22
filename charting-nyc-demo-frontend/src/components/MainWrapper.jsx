@@ -1,27 +1,51 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import GraphContainer from "./GraphContainer";
 import getAllData from "../utilities/getAllData";
 
 const ComponentContainer = styled.div``;
+const SelectorContainer = styled.div``;
+
+const defaultData = {
+  name: "",
+  zipcodes: [],
+  surveyData: [],
+};
 
 const getZips = (array, neighborhood) => {
   return array.find((item) => item.name && item.name === neighborhood);
 };
 
+const getDataByZip = (zipcodes, allData) => {
+  const stringZips = zipcodes.map((item) => item.toString());
+  const zipSet = new Set(stringZips);
+
+  const matchingObjects = allData.filter((data) =>
+    zipSet.has(data["jurisdiction_name"])
+  );
+
+  return matchingObjects;
+};
+
 const MainWrapper = (props) => {
   const [allData, setAllData] = useState(getAllData());
   const [selectedOption, setSelectedOption] = useState("");
-  const [selectedZips, setSelectedZips] = useState([]);
-  const [selectedData, setSelectedData] = useState([]);
+  const [selectedData, setSelectedData] = useState(defaultData);
 
   useEffect(() => {
     if (!selectedOption) return;
-
+    let newSelectedData = {
+      name: "",
+      zipcodes: [],
+      surveyData: [],
+    };
     const neighborData = getZips(allData.neighborhoods, selectedOption);
-    console.log("neighborData: ", neighborData);
-    neighborData &&
-      neighborData.zipcode &&
-      setSelectedZips(neighborData.zipcode);
+    const filteredData = getDataByZip(neighborData.zipcode, allData.responses);
+
+    newSelectedData.name = selectedOption;
+    newSelectedData.zipcodes = neighborData.zipcode;
+    newSelectedData.surveyData = filteredData;
+    setSelectedData(newSelectedData);
   }, [selectedOption]);
 
   const handleChange = (event) => {
@@ -42,13 +66,16 @@ const MainWrapper = (props) => {
   return (
     <ComponentContainer>
       <h3>Neighborhood: {`${selectedOption}`}</h3>
-      <label htmlFor="dropdown">Choose an option:</label>
-      <select id="dropdown" value={selectedOption} onChange={handleChange}>
-        <option value="" disabled>
-          Select an option
-        </option>
-        {allData && allData.neighborhoods && renderOptions()}
-      </select>
+      <SelectorContainer>
+        <label htmlFor="dropdown">Choose an option:</label>
+        <select id="dropdown" value={selectedOption} onChange={handleChange}>
+          <option value="" disabled>
+            Select an option
+          </option>
+          {allData && allData.neighborhoods && renderOptions()}
+        </select>
+      </SelectorContainer>
+      <GraphContainer />
     </ComponentContainer>
   );
 };
