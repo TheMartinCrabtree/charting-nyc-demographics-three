@@ -4,7 +4,7 @@ import MainWrapper from "./components/MainWrapper";
 function App() {
   return (
     <div>
-      Main Window
+      <h1>NYC Demographic Survey Data</h1>
       <MainWrapper />
     </div>
   );
