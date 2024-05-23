@@ -1,12 +1,19 @@
+import React from "react";
+import styled from "styled-components";
 import "./App.css";
 import MainWrapper from "./components/MainWrapper";
 
+const LayoutWrapper = styled.div``;
+const StyledH1 = styled.h1`
+  padding: 0 2em;
+`;
+
 function App() {
   return (
-    <div>
-      <h1>NYC Demographic Survey Data</h1>
+    <LayoutWrapper>
+      <StyledH1>NYC Demographic Survey Data</StyledH1>
       <MainWrapper />
-    </div>
+    </LayoutWrapper>
   );
 }
 export default App;

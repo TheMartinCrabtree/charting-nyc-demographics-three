@@ -3,8 +3,24 @@ import styled from "styled-components";
 import GraphContainer from "./GraphContainer";
 import getAllData from "../utilities/getAllData";
 
-const ComponentContainer = styled.div``;
-const SelectorContainer = styled.div``;
+const ComponentContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  background-image: url("/manhattan-night.webp");
+  background-size: cover; /* or 'contain' */
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding-top: 1em;
+`;
+const SelectorContainer = styled.div`
+  padding: 0 2em;
+  color: white;
+`;
+
+const StyledH3 = styled.h3`
+  padding: 0 2em;
+`;
 
 const defaultData = {
   name: "",
@@ -81,7 +97,7 @@ const MainWrapper = (props) => {
 
   return (
     <ComponentContainer>
-      <h3>Neighborhood: {`${selectedOption}`}</h3>
+      <StyledH3>Neighborhood: {`${selectedOption}`}</StyledH3>
       <SelectorContainer>
         <label htmlFor="neighborhood selection">Select A Neighborhood: </label>
         <select

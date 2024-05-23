@@ -4,7 +4,10 @@ import BarChartView from "./BarChartView";
 import styled from "styled-components";
 
 const LayoutWrapper = styled.div``;
-const SelectionContainer = styled.div``;
+const SelectionContainer = styled.div`
+  padding: 1em 2em;
+  color: white;
+`;
 const ChartContainer = styled.div`
   background-color: lightgray;
 `;
