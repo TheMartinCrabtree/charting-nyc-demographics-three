@@ -12,6 +12,22 @@ const defaultData = {
   surveyData: [],
 };
 
+const formatData = (dataArr) => {
+  if (dataArr.length === 0) return [];
+  return dataArr.map((dataObj) => {
+    const { jurisdiction_name, count_participants, count_female, count_male } =
+      dataObj;
+
+    const newObj = {
+      zipcode: parseInt(jurisdiction_name, 10),
+      participants: parseInt(count_participants, 10),
+      female: parseInt(count_female, 10),
+      male: parseInt(count_male, 10),
+    };
+    return newObj;
+  });
+};
+
 const getZips = (array, neighborhood) => {
   return array.find((item) => item.name && item.name === neighborhood);
 };
@@ -24,7 +40,7 @@ const getDataByZip = (zipcodes, allData) => {
     zipSet.has(data["jurisdiction_name"])
   );
 
-  return matchingObjects;
+  return formatData(matchingObjects);
 };
 
 const MainWrapper = (props) => {
@@ -47,7 +63,7 @@ const MainWrapper = (props) => {
     newSelectedData.zipcodes = neighborData.zipcode;
     newSelectedData.surveyData = filteredData;
     setSelectedData(newSelectedData);
-  }, [selectedOption]);
+  }, [selectedOption, allData]);
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
