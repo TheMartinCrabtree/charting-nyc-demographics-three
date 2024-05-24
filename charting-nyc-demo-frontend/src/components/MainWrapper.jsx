@@ -10,7 +10,6 @@ const ComponentContainer = styled.div`
   background-size: cover; /* or 'contain' */
   background-position: center;
   background-repeat: no-repeat;
-  color: white;
   padding-top: 1em;
 `;
 const SelectorContainer = styled.div`
@@ -19,6 +18,7 @@ const SelectorContainer = styled.div`
 `;
 
 const StyledH3 = styled.h3`
+  color: white;
   padding: 0 2em;
 `;
 
